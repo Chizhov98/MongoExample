@@ -15,11 +15,8 @@ public class Main {
 
         MongoDatabase database = connect("aLevel");
 
-        // CRUD / Create
-        createData(database);
 
-        // CRUD / Read
-        readAllData(database);
+
 
         // CRUD / Update
         //readOneData(database);
@@ -32,28 +29,6 @@ public class Main {
         //readAllData(database);
     }
 
-    private static void createData(MongoDatabase database) {
-        final User user1 = new User("Bill", "Loney");
-        final User user2 = new User("Chip", "Munk");
-        final User user3 = new User("Forrest", "Green");
-
-        final Document document1 = mapperFrom(user1);
-        final Document document2 = mapperFrom(user2);
-        final Document document3 = mapperFrom(user3);
-
-        MongoCollection<Document> users = database.getCollection("users");
-        List<Document> documents = Arrays.asList(document1, document2, document3);
-        users.insertMany(documents);
-    }
-
-    private static void readAllData(MongoDatabase database) {
-        MongoCollection<Document> users = database.getCollection("users");
-        FindIterable<Document> documents = users.find();
-        for (Document document : documents) {
-            System.out.println(document);
-        }
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
 
     private static void readOneData(MongoDatabase database) {
         final Document filter = new Document();

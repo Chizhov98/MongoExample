@@ -1,36 +1,26 @@
 package model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+import java.util.List;
+
+@Getter
+@Setter
 public final class User {
     private String id;
     private String firstName;
     private String lastName;
+    private List<BankAccount> bankAccounts;
+    private int age;
+    private String companyName;
+    private String city;
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName, int age, String companyName, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
+        this.age = age;
+        this.companyName = companyName;
+        this.city = city;
     }
 }
