@@ -45,5 +45,25 @@ public class DefaultDao {
                 .into(new ArrayList<>());
     }
 
+    public static <T> void updateObjectById(String id, T object) {
+        Document filter = new Document();
+        filter.append("id", id);
 
+        Document newData = MongoUtils.mapperFrom(object);
+
+        final Document updateObject = new Document();
+        updateObject.append("$set", newData);
+
+        MongoCollection<Document> collection = getMongoCollection(object.getClass().getSimpleName());
+
+        collection.updateOne(filter, updateObject);
+    }
+
+    protected static <T> void deleteDataById(String id, Class<T> type) {
+        final Document filter = new Document();
+        filter.append("id", id);
+
+        MongoCollection<Document> collection = getMongoCollection(type.getSimpleName());
+        collection.deleteOne(filter);
+    }
 }
